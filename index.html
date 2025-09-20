@@ -26,7 +26,402 @@
     </style>
 </head>
 <body>
-    <!-- ...existing HTML content... -->
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+            </div>
+            <h1>SA Guest Portal Manager</h1>
+            <p>Multi-property solution for guest houses and service providers</p>
+        </div>
+        <div class="dashboard">
+            <ul class="nav nav-pills mb-4 justify-content-center" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-content" type="button" role="tab">Dashboard</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties-content" type="button" role="tab">Properties</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing-content" type="button" role="tab">Pricing</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-content" type="button" role="tab">Reports</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <!-- Dashboard Tab -->
+                <div class="tab-pane fade show active" id="dashboard-content" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-home fa-2x text-primary"></i>
+                                <h3>Properties</h3>
+                                <div class="stats-number">12</div>
+                                <p class="text-muted">Managed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-users fa-2x text-primary"></i>
+                                <h3>Guests</h3>
+                                <div class="stats-number">84</div>
+                                <p class="text-muted">This month</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-qrcode fa-2x text-primary"></i>
+                                <h3>QR Scans</h3>
+                                <div class="stats-number">127</div>
+                                <p class="text-muted">This month</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-comments fa-2x text-primary"></i>
+                                <h3>Messages</h3>
+                                <div class="stats-number">56</div>
+                                <p class="text-muted">Via WhatsApp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4>Recent Activity</h4>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>New booking at Sea View Apartment</span>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>QR code scanned at Mountain Lodge</span>
+                                        <small class="text-muted">5 hours ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>Wi-Fi password requested at City Loft</span>
+                                        <small class="text-muted">Yesterday</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>Monthly report generated</span>
+                                        <small class="text-muted">3 days ago</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4>Quick Actions</h4>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-lg">
+                                        <i class="fas fa-plus"></i> Add New Property
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-file-pdf"></i> Generate Report
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-envelope"></i> Email Clients
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-qrcode"></i> Generate QR Codes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Properties Tab -->
+                <div class="tab-pane fade" id="properties-content" role="tabpanel">
+                    <h3 class="mb-4">Your Properties</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Sea View Apartment</h4>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="text-muted">Cape Town, Waterfront</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 12
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 18
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                    <button class="btn btn-sm btn-outline-info">Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Mountain Lodge</h4>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="text-muted">Drakensberg, Kwazulu-Natal</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 8
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 14
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                    <button class="btn btn-sm btn-outline-info">Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>City Loft</h4>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="text-muted">Johannesburg, Sandton</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 10
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 15
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                    <button class="btn btn-sm btn-outline-info">Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Wine Estate Cottage</h4>
+                                    <span class="badge bg-warning text-dark">Setup</span>
+                                </div>
+                                <p class="text-muted">Stellenbosch, Winelands</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 0
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 0
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Complete Setup</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add New Property
+                        </button>
+                    </div>
+                </div>
+                <!-- Pricing Tab -->
+                <div class="tab-pane fade" id="pricing-content" role="tabpanel">
+                    <h3 class="mb-4 text-center">Pricing Plans</h3>
+                    <p class="text-center text-muted mb-5">Choose the plan that works best for your business</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <h4>Starter</h4>
+                                <div class="price">R49<span class="text-muted" style="font-size: 1rem;">/property/mo</span></div>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Up to 3 properties</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Basic guest portal</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> WhatsApp integration</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Monthly reports</li>
+                                    <li class="mb-2"><i class="fas fa-times text-muted"></i> Advanced analytics</li>
+                                    <li class="mb-2"><i class="fas fa-times text-muted"></i> White labeling</li>
+                                </ul>
+                                <button class="btn btn-outline-primary w-100">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pricing-card featured">
+                                <h4>Professional</h4>
+                                <div class="price">R89<span class="text-muted" style="font-size: 1rem;">/property/mo</span></div>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited properties</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Advanced guest portal</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> WhatsApp integration</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Weekly & monthly reports</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Basic analytics</li>
+                                    <li class="mb-2"><i class="fas fa-times text-muted"></i> White labeling</li>
+                                </ul>
+                                <button class="btn btn-primary w-100">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <h4>Enterprise</h4>
+                                <div class="price">R149<span class="text-muted" style="font-size: 1rem;">/property/mo</span></div>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited properties</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Custom guest portal</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Multi-channel support</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Custom reporting</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Advanced analytics</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> White labeling</li>
+                                </ul>
+                                <button class="btn btn-outline-primary w-100">Contact Sales</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Volume Discounts</h5>
+                        <p class="mb-0">We offer special pricing for property management companies with 10+ properties. <a href="#">Contact us</a> for custom enterprise pricing.</p>
+                    </div>
+                </div>
+                <!-- Reports Tab -->
+                <div class="tab-pane fade" id="reports-content" role="tabpanel">
+                    <h3 class="mb-4">Automated Reporting</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4><i class="fas fa-calendar-week"></i> Scheduled Reports</h4>
+                                <p>Automatically generate and send reports to property owners on a schedule that works for them.</p>
+                                <div class="mb-3">
+                                    <label class="form-label">Report Frequency</label>
+                                    <select class="form-select">
+                                        <option>Weekly</option>
+                                        <option selected>Monthly</option>
+                                        <option>Quarterly</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Report Format</label>
+                                    <select class="form-select">
+                                        <option>PDF</option>
+                                        <option selected>Excel</option>
+                                        <option>Web Link</option>
+                                    </select>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="includeCharts" checked>
+                                    <label class="form-check-label" for="includeCharts">Include charts and graphs</label>
+                                </div>
+                                <button class="btn btn-primary">Save Reporting Preferences</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4><i class="fas fa-chart-bar"></i> Sample Report Data</h4>
+                                <p>Here's what property owners will see in their automated reports:</p>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Metric</th>
+                                                <th>Sea View Apt</th>
+                                                <th>Mountain Lodge</th>
+                                                <th>City Loft</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>QR Scans</td>
+                                                <td>18</td>
+                                                <td>14</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Guest Messages</td>
+                                                <td>12</td>
+                                                <td>8</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wi-Fi Requests</td>
+                                                <td>15</td>
+                                                <td>11</td>
+                                                <td>13</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Check-in Issues</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-eye"></i> Preview Report
+                                    </button>
+                                    <button class="btn btn-outline-success">
+                                        <i class="fas fa-envelope"></i> Send Test Email
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card mt-4">
+                        <h4><i class="fas fa-history"></i> Report History</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Report Type</th>
+                                        <th>Date Sent</th>
+                                        <th>Recipients</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sea View Apartment</td>
+                                        <td>Monthly Report</td>
+                                        <td>01 Nov 2023</td>
+                                        <td>owner@seaview.com</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mountain Lodge</td>
+                                        <td>Monthly Report</td>
+                                        <td>01 Nov 2023</td>
+                                        <td>admin@mountainlodge.co.za</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>All Properties</td>
+                                        <td>Weekly Summary</td>
+                                        <td>28 Oct 2023</td>
+                                        <td>you@yourcompany.com</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2023 SA Guest Portal Manager. A comprehensive solution for South African accommodation providers.</p>
+            <p class="text-muted">Data and reporting for multiple properties with WhatsApp integration.</p>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // ...existing JS...
