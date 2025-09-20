@@ -1,30 +1,718 @@
-<div class="col-md-6">
-    <div class="report-card">
-        <h4><i class="fas fa-table"></i> Sample Data Structure</h4>
-        <p>Your Google Sheet should have these columns:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Guest Portal Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c6fd4;
+            --secondary-color: #f8f9fa;
+            --accent-color: #25D366;
+            --text-color: #333;
+            --light-text: #6c757d;
+            --border-radius: 12px;
+        }
         
-        <div class="table-responsive">
-            <table class="table table-bordered table-sm">
-                <thead class="table-light">
-                    <tr>
-                        <th>Column Name</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Property Name</td><td>Name of the apartment/guest house</td></tr>
-                    <tr><td>Address</td><td>Full physical address</td></tr>
-                    <tr><td>WhatsApp Number</td><td>Contact number for verification</td></tr>
-                    <tr><td>Check-in Date</td><td>Guest arrival date</td></tr>
-                    <tr><td>Check-out Date</td><td>Guest departure date</td></tr>
-                    <tr><td>WiFi Network</td><td>Network name for the property</td></tr>
-                    <tr><td>WiFi Password</td><td>Network password</td></tr>
-                    <tr><td>Owner Email</td><td>Property owner's email for reports</td></tr>
-                    <tr><td>Status</td><td>Active/Inactive</td></tr>
-                </tbody>
-            </table>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard {
+            padding: 25px;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+        
+        .stats-card {
+            background: var(--secondary-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .property-card {
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-whatsapp {
+            background: var(--accent-color);
+            color: white;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            color: white;
+        }
+        
+        .pricing-card {
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .pricing-card.featured::before {
+            content: "Most Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+        }
+        
+        .integration-card {
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .google-sheets-img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+            </div>
+            <h1>SA Guest Portal Manager</h1>
+            <p>Multi-property solution using Google Sheets as database</p>
         </div>
         
-        <p class="mt-3"><small>This structure allows you to manage multiple properties efficiently.</small></p>
+        <div class="dashboard">
+            <ul class="nav nav-pills mb-4 justify-content-center" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-content" type="button" role="tab">Dashboard</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties-content" type="button" role="tab">Properties</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="integration-tab" data-bs-toggle="tab" data-bs-target="#integration-content" type="button" role="tab">Integration</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing-content" type="button" role="tab">Pricing</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-content" type="button" role="tab">Reports</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+                <!-- Dashboard Tab -->
+                <div class="tab-pane fade show active" id="dashboard-content" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-home fa-2x text-primary"></i>
+                                <h3>Properties</h3>
+                                <div class="stats-number">12</div>
+                                <p class="text-muted">Managed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-users fa-2x text-primary"></i>
+                                <h3>Guests</h3>
+                                <div class="stats-number">84</div>
+                                <p class="text-muted">This month</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-qrcode fa-2x text-primary"></i>
+                                <h3>QR Scans</h3>
+                                <div class="stats-number">127</div>
+                                <p class="text-muted">This month</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <i class="fas fa-comments fa-2x text-primary"></i>
+                                <h3>Messages</h3>
+                                <div class="stats-number">56</div>
+                                <p class="text-muted">Via WhatsApp</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4>Recent Activity</h4>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>New booking at Sea View Apartment</span>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>QR code scanned at Mountain Lodge</span>
+                                        <small class="text-muted">5 hours ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>Wi-Fi password requested at City Loft</span>
+                                        <small class="text-muted">Yesterday</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>Monthly report generated</span>
+                                        <small class="text-muted">3 days ago</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4>Quick Actions</h4>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-lg">
+                                        <i class="fas fa-plus"></i> Add New Property
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-file-pdf"></i> Generate Report
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-envelope"></i> Email Clients
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-qrcode"></i> Generate QR Codes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Properties Tab -->
+                <div class="tab-pane fade" id="properties-content" role="tabpanel">
+                    <h3 class="mb-4">Your Properties</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Sea View Apartment</h4>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="text-muted">Cape Town, Waterfront</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 12
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 18
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                    <button class="btn btn-sm btn-outline-info">Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Mountain Lodge</h4>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="text-muted">Drakensberg, Kwazulu-Natal</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 8
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 14
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                    <button class="btn btn-sm btn-outline-info">Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>City Loft</h4>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="text-muted">Johannesburg, Sandton</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 10
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 15
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                    <button class="btn btn-sm btn-outline-info">Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="property-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Wine Estate Cottage</h4>
+                                    <span class="badge bg-warning text-dark">Setup</span>
+                                </div>
+                                <p class="text-muted">Stellenbosch, Winelands</p>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <strong>Guests this month:</strong> 0
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>QR Scans:</strong> 0
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Complete Setup</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Generate QR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add New Property
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Integration Tab -->
+                <div class="tab-pane fade" id="integration-content" role="tabpanel">
+                    <h3 class="mb-4">Google Sheets Integration</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="report-card integration-card">
+                                <h4><i class="fab fa-google"></i> Google Sheets as Database</h4>
+                                <p>Instead of Airtable and Glide, we use Google Sheets which is:</p>
+                                <ul>
+                                    <li>Free to use</li>
+                                    <li>Familiar to most users</li>
+                                    <li>Accessible from any device</li>
+                                    <li>Easy to share with team members</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">How it works:</h5>
+                                <ol>
+                                    <li>Create a Google Sheet with your property data</li>
+                                    <li>Use Google Apps Script to create a web API</li>
+                                    <li>Connect your guest portal to the API</li>
+                                    <li>Data updates in real-time</li>
+                                </ol>
+                                
+                                <a href="#" class="btn btn-success">
+                                    <i class="fas fa-file-alt"></i> View Template Sheet
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4><i class="fas fa-table"></i> Sample Data Structure</h4>
+                                <p>Your Google Sheet should have these columns:</p>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Column Name</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Property Name</td><td>Name of the apartment/guest house</td></tr>
+                                            <tr><td>Address</td><td>Full physical address</td></tr>
+                                            <tr><td>WhatsApp Number</td><td>Contact number for verification</td></tr>
+                                            <tr><td>Check-in Date</td><td>Guest arrival date</td></tr>
+                                            <tr><td>Check-out Date</td><td>Guest departure date</td></tr>
+                                            <tr><td>WiFi Network</td><td>Network name for the property</td></tr>
+                                            <tr><td>WiFi Password</td><td>Network password</td></tr>
+                                            <tr><td>Owner Email</td><td>Property owner's email for reports</td></tr>
+                                            <tr><td>Status</td><td>Active/Inactive</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <p class="mt-3"><small>This structure allows you to manage multiple properties efficiently.</small></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-card mt-4">
+                        <h4><i class="fas fa-cogs"></i> Implementation Steps</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>1. Create Your Google Sheet</h5>
+                                <p>Set up a new Google Sheet with the column structure shown above. Add your property data.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>2. Set Up Google Apps Script</h5>
+                                <p>Create a script to expose your sheet data as a web API that your portal can access.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>3. Integrate with Your Portal</h5>
+                                <p>Connect your guest portal to the API to fetch and update property information.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>4. Test the System</h5>
+                                <p>Verify that QR codes work correctly and data is being retrieved properly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pricing Tab -->
+                <div class="tab-pane fade" id="pricing-content" role="tabpanel">
+                    <h3 class="mb-4 text-center">Pricing Plans</h3>
+                    <p class="text-center text-muted mb-5">Choose the plan that works best for your business</p>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <h4>Starter</h4>
+                                <div class="price">R49<span class="text-muted" style="font-size: 1rem;">/property/mo</span></div>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Up to 3 properties</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Basic guest portal</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> WhatsApp integration</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Monthly reports</li>
+                                    <li class="mb-2"><i class="fas fa-times text-muted"></i> Advanced analytics</li>
+                                    <li class="mb-2"><i class="fas fa-times text-muted"></i> White labeling</li>
+                                </ul>
+                                <button class="btn btn-outline-primary w-100">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pricing-card featured">
+                                <h4>Professional</h4>
+                                <div class="price">R89<span class="text-muted" style="font-size: 1rem;">/property/mo</span></div>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited properties</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Advanced guest portal</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> WhatsApp integration</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Weekly & monthly reports</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Basic analytics</li>
+                                    <li class="mb-2"><i class="fas fa-times text-muted"></i> White labeling</li>
+                                </ul>
+                                <button class="btn btn-primary w-100">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <h4>Enterprise</h4>
+                                <div class="price">R149<span class="text-muted" style="font-size: 1rem;">/property/mo</span></div>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited properties</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Custom guest portal</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Multi-channel support</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Custom reporting</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> Advanced analytics</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success"></i> White labeling</li>
+                                </ul>
+                                <button class="btn btn-outline-primary w-100">Contact Sales</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Volume Discounts</h5>
+                        <p class="mb-0">We offer special pricing for property management companies with 10+ properties. <a href="#">Contact us</a> for custom enterprise pricing.</p>
+                    </div>
+                </div>
+                
+                <!-- Reports Tab -->
+                <div class="tab-pane fade" id="reports-content" role="tabpanel">
+                    <h3 class="mb-4">Automated Reporting</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4><i class="fas fa-calendar-week"></i> Scheduled Reports</h4>
+                                <p>Automatically generate and send reports to property owners on a schedule that works for them.</p>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Report Frequency</label>
+                                    <select class="form-select">
+                                        <option>Weekly</option>
+                                        <option selected>Monthly</option>
+                                        <option>Quarterly</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Report Format</label>
+                                    <select class="form-select">
+                                        <option>PDF</option>
+                                        <option selected>Excel</option>
+                                        <option>Web Link</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="includeCharts" checked>
+                                    <label class="form-check-label" for="includeCharts">Include charts and graphs</label>
+                                </div>
+                                
+                                <button class="btn btn-primary">Save Reporting Preferences</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <h4><i class="fas fa-chart-bar"></i> Sample Report Data</h4>
+                                <p>Here's what property owners will see in their automated reports:</p>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Metric</th>
+                                                <th>Sea View Apt</th>
+                                                <th>Mountain Lodge</th>
+                                                <th>City Loft</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>QR Scans</td>
+                                                <td>18</td>
+                                                <td>14</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Guest Messages</td>
+                                                <td>12</td>
+                                                <td>8</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wi-Fi Requests</td>
+                                                <td>15</td>
+                                                <td>11</td>
+                                                <td>13</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Check-in Issues</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-eye"></i> Preview Report
+                                    </button>
+                                    <button class="btn btn-outline-success">
+                                        <i class="fas fa-envelope"></i> Send Test Email
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-card mt-4">
+                        <h4><i class="fas fa-history"></i> Report History</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Report Type</th>
+                                        <th>Date Sent</th>
+                                        <th>Recipients</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sea View Apartment</td>
+                                        <td>Monthly Report</td>
+                                        <td>01 Nov 2023</td>
+                                        <td>owner@seaview.com</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mountain Lodge</td>
+                                        <td>Monthly Report</td>
+                                        <td>01 Nov 2023</td>
+                                        <td>admin@mountainlodge.co.za</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>All Properties</td>
+                                        <td>Weekly Summary</td>
+                                        <td>28 Oct 2023</td>
+                                        <td>you@yourcompany.com</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 SA Guest Portal Manager. A comprehensive solution for South African accommodation providers.</p>
+            <p class="text-muted">Data and reporting for multiple properties with WhatsApp integration.</p>
+        </div>
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const triggerTabList = document.querySelectorAll('#myTab button');
+            triggerTabList.forEach(triggerEl => {
+                triggerEl.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const tab = new bootstrap.Tab(this);
+                    tab.show();
+                });
+            });
+            
+            // Simulate property interactions
+            const propertyButtons = document.querySelectorAll('.property-card button');
+            propertyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const propertyName = this.closest('.property-card').querySelector('h4').textContent;
+                    const action = this.textContent.trim();
+                    alert(`${action} for ${propertyName}`);
+                });
+            });
+            
+            // Simulate pricing plan selection
+            const pricingButtons = document.querySelectorAll('.pricing-card .btn');
+            pricingButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plan = this.closest('.pricing-card').querySelector('h4').textContent;
+                    alert(`Selected plan: ${plan}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
